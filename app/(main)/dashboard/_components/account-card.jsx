@@ -4,13 +4,7 @@ import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useEffect } from "react";
 import useFetch from "@/hooks/use-fetch";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import Link from "next/link";
 import { updateDefaultAccount } from "@/actions/account";
 import { toast } from "sonner";
@@ -49,37 +43,40 @@ export function AccountCard({ account }) {
   }, [error]);
 
   return (
-    <Card className="hover:shadow-md transition-shadow group relative">
-      <Link href={`/account/${id}`}>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium capitalize">
+    <div className="glass-panel glass-panel-hover rounded-2xl border border-white/10 overflow-hidden relative group shadow-lg hover:shadow-[0_8px_30px_rgb(139,92,246,0.15)] transition-all duration-300">
+      <Link href={`/account/${id}`} className="block p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-bold capitalize text-white group-hover:text-purple-400 transition-colors">
             {name}
-          </CardTitle>
-          <Switch
-            checked={isDefault}
-            onClick={handleDefaultChange}
-            disabled={updateDefaultLoading}
-          />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+          </h3>
+          <div onClick={(e) => e.stopPropagation()}>
+            <Switch
+              checked={isDefault}
+              onClick={handleDefaultChange}
+              disabled={updateDefaultLoading}
+              className="data-[state=checked]:bg-purple-500"
+            />
+          </div>
+        </div>
+        <div className="mb-6">
+          <div className="text-3xl font-extrabold text-white tracking-tight">
             ${parseFloat(balance).toFixed(2)}
           </div>
-          <p className="text-xs text-muted-foreground">
-            {type.charAt(0) + type.slice(1).toLowerCase()} Account
+          <p className="text-xs text-purple-300/70 font-medium mt-1">
+            {type.charAt(0) + type.slice(1).toLowerCase()} Wallet
           </p>
-        </CardContent>
-        <CardFooter className="flex justify-between text-sm text-muted-foreground">
-          <div className="flex items-center">
-            <ArrowUpRight className="mr-1 h-4 w-4 text-green-500" />
-            Income
+        </div>
+        <div className="flex justify-between items-center text-xs border-t border-white/5 pt-4 text-gray-400 font-medium">
+          <div className="flex items-center gap-1 hover:text-green-400 transition-colors">
+            <ArrowUpRight className="h-4 w-4 text-green-400" />
+            <span>Income</span>
           </div>
-          <div className="flex items-center">
-            <ArrowDownRight className="mr-1 h-4 w-4 text-red-500" />
-            Expense
+          <div className="flex items-center gap-1 hover:text-red-400 transition-colors">
+            <ArrowDownRight className="h-4 w-4 text-red-400" />
+            <span>Expense</span>
           </div>
-        </CardFooter>
+        </div>
       </Link>
-    </Card>
+    </div>
   );
 }

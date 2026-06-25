@@ -28,16 +28,20 @@ export default async function AddTransactionPage({ searchParams }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-5">
-      <div className="flex justify-center md:justify-normal mb-8">
-        <h1 className="text-5xl gradient-title ">Add Transaction</h1>
+    <div className="max-w-3xl mx-auto px-4 md:px-8 pb-12 relative z-10 text-gray-100">
+      <div className="flex justify-center mb-8">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight gradient-title">
+          {editId ? "Modify Transaction" : "Transaction Control Unit"}
+        </h1>
       </div>
-      <AddTransactionForm
-        accounts={accounts}
-        categories={defaultCategories}
-        editMode={!!editId}
-        initialData={initialData}
-      />
+      <div className="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 shadow-xl">
+        <AddTransactionForm
+          accounts={accounts}
+          categories={defaultCategories}
+          editMode={!!editId}
+          initialData={initialData}
+        />
+      </div>
     </div>
   );
 }
