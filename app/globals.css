@@ -208,3 +208,25 @@ html {
   background-clip: text;
 }
 
+.animate-spin-slow {
+  animation: spin 12s linear infinite;
+}
+
+/* Custom indicator styles */
+.glow-text-purple {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.glow-text-pink {
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+}
+
+.glow-border-purple {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.glow-border-pink {
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+}
+
+

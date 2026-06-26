@@ -1,20 +1,18 @@
 import { getUserAccounts } from "@/actions/dashboard";
 import { getDashboardData } from "@/actions/dashboard";
 import { getCurrentBudget } from "@/actions/budget";
-import { AccountCard } from "./_components/account-card";
-import { CreateAccountDrawer } from "@/components/create-account-drawer";
-import { BudgetProgress } from "./_components/budget-progress";
-
-import { Plus } from "lucide-react";
-import { DashboardOverview } from "./_components/transaction-overview";
+import { getUserGoals, getUserSubscriptions } from "@/actions/dashboard-extras";
+import { DashboardTabs } from "./_components/dashboard-tabs";
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
-  const [accounts, transactions] = await Promise.all([
+  const [accounts, transactions, goals, subscriptions] = await Promise.all([
     getUserAccounts(),
     getDashboardData(),
+    getUserGoals(),
+    getUserSubscriptions(),
   ]);
 
   const defaultAccount = accounts?.find((account) => account.isDefault);
@@ -38,36 +36,15 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Budget Progress */}
-      <BudgetProgress
-        initialBudget={budgetData?.budget}
-        currentExpenses={budgetData?.currentExpenses || 0}
-      />
-
-      {/* Dashboard Overview */}
-      <DashboardOverview
-        accounts={accounts}
+      {/* Glassmorphic Tab Container */}
+      <DashboardTabs
+        accounts={accounts || []}
         transactions={transactions || []}
+        goals={goals || []}
+        subscriptions={subscriptions || []}
+        budgetData={budgetData}
       />
-
-      {/* Accounts Grid */}
-      <div className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-bold text-white">Your Wallets & Accounts</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <CreateAccountDrawer>
-            <div className="glass-panel border-dashed border-white/20 hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-300 rounded-2xl cursor-pointer flex flex-col items-center justify-center text-gray-400 hover:text-white h-[180px] p-6 group">
-              <div className="p-4 rounded-full bg-white/5 border border-white/10 group-hover:scale-110 group-hover:border-purple-500/30 transition-all mb-4">
-                <Plus className="h-6 w-6 text-purple-400" />
-              </div>
-              <p className="text-sm font-medium">Add New Account</p>
-            </div>
-          </CreateAccountDrawer>
-          {accounts.length > 0 &&
-            accounts?.map((account) => (
-              <AccountCard key={account.id} account={account} />
-            ))}
-        </div>
-      </div>
     </div>
   );
 }
+

@@ -12,6 +12,23 @@ Money💲 is a futuristic, next-generation AI-powered personal finance managemen
 
 ---
 
+## 🔮 Advanced Financial Features & Global HUD Loader (Makeover V3)
+- **Global Ticker Loader**: A frosted glassmorphic loader modal that shows rotating double visual rings, neon glowing bars, and cycling financial log phrases to indicate interaction feedback.
+- **Dynamic Tabbed Navigation**: A futuristic selector on the dashboard allowing seamless switching between:
+  1. **Command Center**: Budgets overview, recent activity pie charts, and multiple wallet drawer integrations.
+  2. **Savings Goals**: Savings cards featuring circular SVG progress rings, deposit/withdrawal modifiers, and fully-funded badges.
+  3. **Subscription Manager**: Recurring service manager computing monthly burn rates, billing cycles, and next-renewal alerts.
+  4. **Wealth & Health Diagnostics**: Assets vs. custom liabilities net worth AreaChart and a Financial Health Score gauge showing diagnostics and sub-scores.
+  5. **Calculators & Data Exports**:
+     - *Cashflow Heatmap*: Grid showing daily cash changes and counts.
+     - *Expense Forecasting*: Projections bar chart using historical trends.
+     - *Debt payoff*: Snowball vs. Avalanche simulator.
+     - *Currency Converter*: Simulated rate desk for USD, EUR, GBP, JPY, and INR.
+     - *Ledger Exporter*: Instantly download filtered transaction data to CSV/JSON files.
+
+
+---
+
 ## 🔧 Tech Stack
 
 | Category           | Tools / Frameworks                                     |

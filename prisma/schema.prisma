@@ -16,6 +16,8 @@ model User {
   transactions  Transaction[]
   accounts      Account[]
   budgets       Budget[]
+  goals         Goal[]
+  subscriptions Subscription[]
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
@@ -75,4 +77,36 @@ model Budget {
 
   @@index([userId])
   @@map("budgets")
+}
+
+model Goal {
+  id          String   @id @default(uuid())
+  name        String
+  target      Decimal
+  current     Decimal  @default(0)
+  deadline    DateTime?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@map("goals")
+}
+
+model Subscription {
+  id           String   @id @default(uuid())
+  name         String
+  amount       Decimal
+  billingCycle String   // "MONTHLY" or "YEARLY"
+  startDate    DateTime
+  nextPayment  DateTime
+  category     String   @default("entertainment")
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@map("subscriptions")
 }
