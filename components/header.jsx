@@ -8,6 +8,7 @@ import { isGuestUser } from "@/lib/guest";
 import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
 import GuestUserButton from "./guest-user-button";
+import HeaderNavigation from "./header-navigation";
 
 const Header = async () => {
   const user = await checkUser();
@@ -27,20 +28,8 @@ const Header = async () => {
         </Link>
 
         {/* Navigation Links - Different for signed in/out users */}
-        <div className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/#features"
-            className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-colors"
-          >
-            Features
-          </Link>
-          <Link
-            href="/#testimonials"
-            className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-colors"
-          >
-            Testimonials
-          </Link>
-        </div>
+        <HeaderNavigation user={user} />
+
 
         {/* Action Buttons */}
         <div className="flex items-center space-x-4">
