@@ -33,7 +33,7 @@ export default function HeaderNavigation({ user }) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-semibold text-gray-300 hover:text-purple-400 transition-colors flex items-center gap-1.5"
+              className="text-xs font-semibold text-slate-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400 transition-colors flex items-center gap-1.5"
             >
               {Icon && <Icon className="h-3.5 w-3.5 text-purple-400" />}
               <span>{link.label}</span>
@@ -45,7 +45,7 @@ export default function HeaderNavigation({ user }) {
       {/* Mobile Hamburger Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition border border-white/5"
+        className="lg:hidden p-2 rounded-xl text-slate-500 dark:text-gray-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition border border-slate-200/50 dark:border-white/5"
         aria-label="Toggle Menu"
       >
         {isOpen ? <X className="h-5 w-5 text-pink-400 animate-pulse" /> : <Menu className="h-5 w-5" />}
@@ -53,7 +53,7 @@ export default function HeaderNavigation({ user }) {
 
       {/* Mobile Dropdown Panel */}
       {isOpen && (
-        <div className="absolute top-[70px] left-0 w-full glass-panel p-6 rounded-3xl border border-white/10 flex flex-col space-y-4 shadow-2xl z-50 animate-fadeIn lg:hidden">
+        <div className="absolute top-[70px] left-0 w-full glass-panel p-6 rounded-3xl border border-slate-200/50 dark:border-white/10 flex flex-col space-y-4 shadow-2xl z-50 animate-fadeIn lg:hidden">
           {activeLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -61,7 +61,7 @@ export default function HeaderNavigation({ user }) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-bold text-gray-300 hover:text-purple-400 transition-colors flex items-center gap-2 p-2 rounded-xl hover:bg-white/5"
+                className="text-sm font-bold text-slate-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400 transition-colors flex items-center gap-2 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5"
               >
                 {Icon && <Icon className="h-4 w-4 text-purple-400" />}
                 <span>{link.label}</span>

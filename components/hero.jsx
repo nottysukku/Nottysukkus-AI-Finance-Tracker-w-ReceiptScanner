@@ -29,7 +29,7 @@ const HeroSection = () => {
   return (
     <section className="relative pt-48 pb-20 px-4 overflow-hidden grid-bg">
       <div className="container mx-auto text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border-purple-500/30 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-glow">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border-purple-500/30 text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-glow">
           <span>✨ Introducing Next-Gen AI Finance Tracker</span>
         </div>
 
@@ -37,7 +37,7 @@ const HeroSection = () => {
           Smarter Money, <br /> Brighter Future
         </h1>
 
-        <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-lg md:text-xl text-slate-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
           An AI-powered financial management platform that helps you track,
           analyze, and optimize your spending with real-time insights.
         </p>
@@ -49,29 +49,29 @@ const HeroSection = () => {
             </Button>
           </Link>
           <Link href="https://www.github.com/nottysukku" target="_blank">
-            <Button size="lg" variant="outline" className="px-10 py-6 text-base glass-panel border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-white rounded-full transition-all">
+            <Button size="lg" variant="outline" className="px-10 py-6 text-base glass-panel border-slate-300/50 dark:border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-slate-700 dark:text-white rounded-full transition-all">
               Github
             </Button>
           </Link>
         </div>
 
         <div className="flex justify-center items-center mt-6 gap-2">
-          <span className="text-sm text-gray-400">Or</span>
+          <span className="text-sm text-slate-500 dark:text-gray-400">Or</span>
           <Link href="/sign-in">
-            <Button variant="link" className="p-0 h-auto text-purple-400 hover:text-purple-300 underline font-medium">
+            <Button variant="link" className="p-0 h-auto text-purple-600 dark:text-purple-400 hover:text-purple-500 dark:hover:text-purple-300 underline font-medium">
               try as guest →
             </Button>
           </Link>
         </div>
 
         <div className="hero-image-wrapper mt-16 md:mt-24">
-          <div ref={imageRef} className="hero-image p-3 rounded-2xl glass-panel border-white/10 max-w-5xl mx-auto shadow-[0_20px_50px_rgba(139,92,246,0.2)]">
+          <div ref={imageRef} className="hero-image p-3 rounded-2xl glass-panel border-slate-200/50 dark:border-white/10 max-w-5xl mx-auto shadow-[0_20px_50px_rgba(139,92,246,0.2)]">
             <Image
               src="/laptop-lot-money-concept-earning-money-internet-ai-generated_894218-1059.avif"
               width={1280}
               height={720}
               alt="Dashboard Preview"
-              className="rounded-xl border border-white/5 mx-auto"
+              className="rounded-xl border border-slate-200/30 dark:border-white/5 mx-auto"
               priority
             />
           </div>

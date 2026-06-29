@@ -149,6 +149,9 @@ html {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.5);
+}
+.dark ::-webkit-scrollbar-track {
   background: rgba(3, 7, 18, 0.5);
 }
 ::-webkit-scrollbar-thumb {
@@ -225,13 +228,25 @@ html {
 
 /* Futuristic background elements */
 .grid-bg {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: center;
 }
 
+.dark .grid-bg {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
 .gradient-title {
+  background: linear-gradient(135deg, #1e1b4b 0%, #7c3aed 50%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .gradient-title {
   background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

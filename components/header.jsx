@@ -15,7 +15,7 @@ const Header = async () => {
   const isGuest = user ? await isGuestUser(user.clerkUserId) : false;
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 rounded-full glass-panel border border-white/10 px-6 py-3 shadow-[0_8px_32px_0_rgba(139,92,246,0.1)]">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 rounded-full glass-panel border border-slate-200/50 dark:border-white/10 px-6 py-3 shadow-[0_8px_32px_0_rgba(139,92,246,0.1)]">
       <nav className="flex items-center justify-between">
         <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
           <Image
@@ -39,8 +39,8 @@ const Header = async () => {
           {user ? (
             <>
               <Link href="/dashboard">
-                <Button variant="outline" className="glass-panel border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-white rounded-full flex items-center gap-2">
-                  <LayoutDashboard size={18} className="text-purple-400" />
+                <Button variant="outline" className="glass-panel border-slate-300/50 dark:border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-slate-700 dark:text-white rounded-full flex items-center gap-2">
+                  <LayoutDashboard size={18} className="text-purple-500 dark:text-purple-400" />
                   <span className="hidden md:inline">Dashboard</span>
                 </Button>
               </Link>
@@ -71,7 +71,7 @@ const Header = async () => {
           ) : (
             <SignedOut>
               <SignInButton forceRedirectUrl="/dashboard">
-                <Button variant="outline" className="glass-panel border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-white rounded-full">
+                <Button variant="outline" className="glass-panel border-slate-300/50 dark:border-white/10 hover:border-purple-500/30 hover:bg-purple-500/10 text-slate-700 dark:text-white rounded-full">
                   Login
                 </Button>
               </SignInButton>

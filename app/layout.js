@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
-import TawkTo from "@/components/tawk-to";
+import GeminiChatbot from "@/components/gemini-chatbot";
 import { LoadingProvider } from "@/context/loading-context";
 import { LoadingModal } from "@/components/loading-modal";
 
@@ -49,12 +49,12 @@ export default function RootLayout({ children }) {
               </div>
               
               <Toaster richColors />
-              <TawkTo />
+              <GeminiChatbot />
               <LoadingModal />
 
-              <footer className="glass-panel border-t border-white/5 py-12 mt-20">
-                <div className="container mx-auto px-4 text-center text-gray-400">
-                  <p className="hover:text-purple-400 transition-colors">Made with 💗 by Sukritchopra &copy; 2026</p>
+              <footer className="glass-panel border-t border-slate-200/30 dark:border-white/5 py-12 mt-20">
+                <div className="container mx-auto px-4 text-center text-slate-500 dark:text-gray-400">
+                  <p className="hover:text-purple-500 dark:hover:text-purple-400 transition-colors">Made with 💗 by Sukritchopra &copy; 2026</p>
                 </div>
               </footer>
             </div>
