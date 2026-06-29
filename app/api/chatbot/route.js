@@ -34,7 +34,7 @@ USER PROFILE CONTEXT:
 
 Please greet the user by their name when appropriate. Use their salary or career background context to tailor your responses if they ask for recommendations.`;
 
-    const apiKey = process.env.GEMINI_API_KEY || "AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs";
+    const apiKey = process.env.GEMINI_API_KEY;
     
     if (!apiKey) {
       return NextResponse.json({ 

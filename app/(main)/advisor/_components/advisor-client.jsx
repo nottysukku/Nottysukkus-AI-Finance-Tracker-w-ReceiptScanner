@@ -39,46 +39,21 @@ export default function AdvisorClient({ userProfile }) {
     setIsTyping(true);
 
     try {
-      const apiKey = "AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs";
-      
-      const systemContext = `You are a helpful, professional, and knowledgeable personal finance advisor on the Money platform.
-      The user's name is ${userProfile?.name || "unknown"}.
-      Their annual salary is $${userProfile?.salary || "60000"}.
-      Their career bio / resume details: ${userProfile?.bio || "Not specified"}.
-      Your goal is to provide concise, actionable financial advice tailored specifically to this user's profile. Use bullet points and clean markdown.
-      Keep responses under 150 words.`;
-
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            systemInstruction: {
-              parts: [{ text: systemContext }],
-            },
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `User asks: ${text}`,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
+      const response = await fetch("/api/advisor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to reach Gemini API");
+        throw new Error("Failed to reach Advisor API");
       }
 
       const data = await response.json();
       const botResponse =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+        data?.response ||
         "I apologize, my cryptographic nodes are currently overloaded. Please query again shortly.";
 
       setMessages((prev) => [...prev, { role: "assistant", content: botResponse }]);
