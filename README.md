@@ -73,7 +73,7 @@ npm install --legacy-peer-deps
 ### 2. Setup Environment Variables
 Create a `.env.local` file in the root directory:
 ```env
-GEMINI_API_KEY=AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs
+GEMINI_API_KEY=
 # NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 # CLERK_SECRET_KEY=
 # NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
