@@ -23,7 +23,7 @@ export async function POST(request) {
   try {
     const { message, history } = await request.json();
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || "AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs";
     
     if (!apiKey) {
       return NextResponse.json({ 

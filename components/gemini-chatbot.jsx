@@ -3,45 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Send, Bot, User, Sparkles, Minimize2 } from "lucide-react";
 
-const SITE_CONTEXT = `You are "Money AI", the built-in intelligent assistant for the Money finance tracking platform.
-You know everything about this app and guide users through it. Here is what the platform offers:
-
-PLATFORM FEATURES:
-- Dashboard: Overview of all finances with animated charts, net worth tracking, spending breakdowns, and financial health scores.
-- Accounts: Users can create multiple accounts (Current, Savings, Credit Card) with balances. One account is set as default.
-- Transactions: Add income/expenses with categories like Housing, Transportation, Groceries, Entertainment, Education, etc. Supports recurring transactions.
-- Receipt Scanner: AI-powered (Gemini) receipt scanning that auto-extracts amount, date, category, and merchant from photos.
-- Budget Tracker: Set monthly budgets and get alerts when approaching limits. Uses the 50/30/20 rule recommendation.
-- Goals Tracker: Set financial goals with deadlines, track progress with visual progress bars.
-- Subscription Manager: Track recurring subscriptions (Netflix, Spotify, etc.) with billing cycle management.
-- AI Financial Advisor: Full-page Gemini-powered chat for in-depth financial advice (available at /advisor).
-- Market Watch: Live crypto and stock market data with interactive charts.
-- Life Simulator: Interactive financial life simulation game.
-- Finance Trivia: Fun quiz game to test financial knowledge.
-- Spin the Wheel: Prize wheel mini-game with financial rewards.
-- Day/Night Theme: Toggle between light and dark modes using the sun/moon button in the header.
-
-NAVIGATION:
-- Header has: Logo, Features link, Testimonials link, Theme Toggle (sun/moon icon), Login button
-- After login: Dashboard, Add Transaction, and user profile buttons appear
-- Sidebar navigation includes: Dashboard, Advisor, Market, Simulator, Trivia, Wheel
-
-GETTING STARTED:
-1. Click "Get Started" or "Login" to sign in with Clerk authentication
-2. Or click "try as guest" to explore with demo data (no account needed)
-3. Set up your first account with an initial balance
-4. Start adding transactions or scan receipts
-
-TIPS:
-- Use receipt scanner to quickly log expenses
-- Set a monthly budget to stay on track
-- Check the AI Advisor (/advisor) for personalized financial strategies
-- Track subscriptions to avoid forgotten charges
-- Set savings goals with deadlines to stay motivated
-
-Be friendly, concise, and helpful. Use emojis sparingly. When users ask about features, guide them to the right page.
-Keep responses under 120 words. Use bullet points for lists.`;
-
 const QUICK_SUGGESTIONS = [
   "How do I add a transaction?",
   "How does receipt scanning work?",
@@ -87,43 +48,23 @@ export default function GeminiChatbot() {
     setIsTyping(true);
 
     try {
-      const apiKey = "AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs";
-
       // Build conversation history for context
-      const conversationHistory = messages.slice(-6).map((msg) => ({
-        role: msg.role === "assistant" ? "model" : "user",
-        parts: [{ text: msg.content }],
-      }));
+      const history = messages.slice(-6);
 
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            systemInstruction: {
-              parts: [{ text: SITE_CONTEXT }],
-            },
-            contents: [
-              ...conversationHistory,
-              {
-                role: "user",
-                parts: [{ text: trimmed }],
-              },
-            ],
-            generationConfig: {
-              maxOutputTokens: 300,
-              temperature: 0.7,
-            },
-          }),
-        }
-      );
+      const response = await fetch("/api/chatbot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: trimmed,
+          history,
+        }),
+      });
 
       if (!response.ok) throw new Error("API request failed");
 
       const data = await response.json();
       const botResponse =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+        data?.response ||
         "I'm having trouble connecting right now. Please try again in a moment!";
 
       setMessages((prev) => [...prev, { role: "assistant", content: botResponse }]);
