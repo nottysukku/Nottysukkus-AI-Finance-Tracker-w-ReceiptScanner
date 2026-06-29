@@ -42,8 +42,7 @@ export default function MarketPage() {
     const interval = setInterval(() => {
       setStocks((prevStocks) =>
         prevStocks.map((stock) => {
-          // Random walk factor: shifts price up or down based on volatility
-          const changePercent = (Math.random() - 0.49) * 2 * stock.volatility; // slight positive bias
+          const changePercent = (Math.random() - 0.49) * 2 * stock.volatility;
           const newPrice = Math.max(0.1, stock.price * (1 + changePercent));
           const prevPrice = stock.price;
           return {
@@ -143,18 +142,18 @@ export default function MarketPage() {
       {/* HUD Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-2 flex items-center gap-3">
-            <Gamepad2 className="h-8 w-8 text-purple-400 animate-pulse-glow" />
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2 flex items-center gap-3">
+            <Gamepad2 className="h-8 w-8 text-purple-500 dark:text-purple-400 animate-pulse-glow" />
             Stock Sandbox Simulator
           </h1>
-          <p className="text-gray-400 text-sm md:text-base font-light">
+          <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base font-light">
             Practice paper-trading stocks and crypto. Watch real-time price feeds and execute instant orders.
           </p>
         </div>
 
         <button
           onClick={handleResetMarket}
-          className="px-4 py-2 rounded-xl text-xs font-semibold text-gray-400 hover:text-white border border-white/10 hover:border-red-500/30 hover:bg-red-500/10 transition"
+          className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/10 hover:border-red-500/30 hover:bg-red-500/5 dark:hover:bg-red-500/10 transition"
         >
           Reset Sandbox
         </button>
@@ -162,23 +161,23 @@ export default function MarketPage() {
 
       {/* Aggregate Overview Card */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="glass-panel p-5 rounded-2xl border border-white/10 text-center">
-          <span className="text-[10px] font-mono tracking-widest text-purple-300 uppercase block mb-1">CASH BALANCE</span>
-          <div className="text-2xl font-black font-mono text-white">
+        <div className="glass-panel p-5 rounded-2xl border border-slate-200/50 dark:border-white/10 text-center">
+          <span className="text-[10px] font-mono tracking-widest text-purple-600 dark:text-purple-300 uppercase block mb-1">CASH BALANCE</span>
+          <div className="text-2xl font-black font-mono text-slate-900 dark:text-white">
             ${cash.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-white/10 text-center">
-          <span className="text-[10px] font-mono tracking-widest text-pink-300 uppercase block mb-1">PORTFOLIO VALUE</span>
-          <div className="text-2xl font-black font-mono text-white">
+        <div className="glass-panel p-5 rounded-2xl border border-slate-200/50 dark:border-white/10 text-center">
+          <span className="text-[10px] font-mono tracking-widest text-pink-600 dark:text-pink-300 uppercase block mb-1">PORTFOLIO VALUE</span>
+          <div className="text-2xl font-black font-mono text-slate-900 dark:text-white">
             ${totalPortfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col justify-center">
-          <span className="text-[10px] font-mono tracking-widest text-emerald-300 uppercase block mb-1">RETURN RATE</span>
-          <div className={`text-xl font-black font-mono ${totalPortfolioValue >= 10000 ? "text-emerald-400" : "text-red-400"}`}>
+        <div className="glass-panel p-5 rounded-2xl border border-slate-200/50 dark:border-white/10 text-center flex flex-col justify-center">
+          <span className="text-[10px] font-mono tracking-widest text-emerald-600 dark:text-emerald-300 uppercase block mb-1">RETURN RATE</span>
+          <div className={`text-xl font-black font-mono ${totalPortfolioValue >= 10000 ? "text-emerald-600 dark:text-emerald-400" : "text-red-650 dark:text-red-400"}`}>
             {totalPortfolioValue >= 10000 ? "+" : ""}{(((totalPortfolioValue - 10000) / 10000) * 100).toFixed(2)}%
           </div>
         </div>
@@ -187,10 +186,10 @@ export default function MarketPage() {
       {/* Main Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Ticker Feed list */}
-        <div className="glass-panel p-5 rounded-3xl border border-white/10 space-y-4 lg:col-span-2">
-          <h3 className="text-sm font-mono font-bold text-purple-300 uppercase border-b border-white/5 pb-2 flex items-center justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-200/50 dark:border-white/10 space-y-4 lg:col-span-2">
+          <h3 className="text-sm font-mono font-bold text-purple-600 dark:text-purple-300 uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 flex items-center justify-between">
             <span>Market Ticker Feeds</span>
-            <span className="text-[10px] text-gray-500 font-light flex items-center gap-1 font-sans">
+            <span className="text-[10px] text-slate-400 dark:text-gray-500 font-light flex items-center gap-1 font-sans">
               <RefreshCw className="h-3 w-3 animate-spin-slow" /> Ticks live
             </span>
           </h3>
@@ -206,27 +205,27 @@ export default function MarketPage() {
                   onClick={() => setSelectedSymbol(stock.symbol)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer flex justify-between items-center ${
                     selectedSymbol === stock.symbol
-                      ? "border-purple-500/40 bg-purple-950/10 shadow-[0_0_15px_rgba(139,92,246,0.15)]"
-                      : "border-white/5 hover:border-white/10 bg-black/20"
+                      ? "border-purple-500/40 bg-purple-50 dark:bg-purple-950/10 shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                      : "border-slate-200/50 dark:border-white/5 hover:border-purple-300 dark:hover:border-white/10 bg-slate-100/50 dark:bg-black/20"
                   }`}
                 >
                   <div className="space-y-1">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-sm font-black text-white">{stock.symbol}</span>
-                      <span className="text-[10px] text-gray-500 font-light hidden sm:inline">{stock.name}</span>
+                      <span className="text-sm font-black text-slate-900 dark:text-white">{stock.symbol}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-gray-500 font-light hidden sm:inline">{stock.name}</span>
                     </div>
                     {owned > 0 && (
-                      <span className="text-[9px] font-mono text-purple-300 bg-purple-950/40 border border-purple-900/30 px-2 py-0.5 rounded-full">
+                      <span className="text-[9px] font-mono text-purple-600 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/30 px-2 py-0.5 rounded-full">
                         Owned: {owned} shares
                       </span>
                     )}
                   </div>
 
                   <div className="text-right space-y-0.5">
-                    <span className="text-sm font-bold font-mono text-white block">
+                    <span className="text-sm font-bold font-mono text-slate-900 dark:text-white block">
                       ${stock.price.toFixed(2)}
                     </span>
-                    <span className={`text-[10px] font-mono flex items-center justify-end gap-0.5 ${hasGained ? "text-emerald-400" : "text-pink-400"}`}>
+                    <span className={`text-[10px] font-mono flex items-center justify-end gap-0.5 ${hasGained ? "text-emerald-600 dark:text-emerald-400" : "text-pink-650 dark:text-pink-400"}`}>
                       {hasGained ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
                       {hasGained ? "+" : ""}{stock.changePercent || "0.00"}%
                     </span>
@@ -238,23 +237,23 @@ export default function MarketPage() {
         </div>
 
         {/* Trade desk panel */}
-        <div className="glass-panel p-5 rounded-3xl border border-white/10 space-y-4 lg:col-span-1 flex flex-col justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-200/50 dark:border-white/10 space-y-4 lg:col-span-1 flex flex-col justify-between">
           <div>
-            <h3 className="text-sm font-mono font-bold text-purple-300 uppercase border-b border-white/5 pb-2 flex items-center gap-1.5">
+            <h3 className="text-sm font-mono font-bold text-purple-600 dark:text-purple-300 uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 flex items-center gap-1.5">
               <ShoppingCart className="h-4 w-4" /> Trade Desk
             </h3>
 
             <form onSubmit={handleExecuteTrade} className="space-y-4 mt-4">
               <div>
-                <span className="text-[10px] font-mono text-gray-400 block mb-1">Target Instrument</span>
-                <div className="p-3 bg-black/40 border border-white/10 rounded-xl flex justify-between items-center">
-                  <span className="text-sm font-black text-white">{selectedStock.symbol}</span>
-                  <span className="text-sm font-mono font-bold text-purple-300">${selectedStock.price.toFixed(2)}</span>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-gray-400 block mb-1">Target Instrument</span>
+                <div className="p-3 bg-slate-100/50 dark:bg-black/40 border border-slate-200/50 dark:border-white/10 rounded-xl flex justify-between items-center">
+                  <span className="text-sm font-black text-slate-900 dark:text-white">{selectedStock.symbol}</span>
+                  <span className="text-sm font-mono font-bold text-purple-600 dark:text-purple-300">${selectedStock.price.toFixed(2)}</span>
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] font-mono text-gray-400 block mb-1">Order Action</span>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-gray-400 block mb-1">Order Action</span>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -262,7 +261,7 @@ export default function MarketPage() {
                     className={`py-2 rounded-xl text-xs font-bold transition ${
                       tradeType === "buy" 
                         ? "bg-purple-600 text-white shadow-lg" 
-                        : "bg-white/5 text-gray-400 hover:text-white"
+                        : "bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400 hover:text-slate-950 dark:hover:text-white"
                     }`}
                   >
                     Buy (Long)
@@ -273,7 +272,7 @@ export default function MarketPage() {
                     className={`py-2 rounded-xl text-xs font-bold transition ${
                       tradeType === "sell" 
                         ? "bg-pink-600 text-white shadow-lg" 
-                        : "bg-white/5 text-gray-400 hover:text-white"
+                        : "bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400 hover:text-slate-950 dark:hover:text-white"
                     }`}
                   >
                     Sell (Short)
@@ -282,27 +281,27 @@ export default function MarketPage() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-mono text-purple-300 uppercase mb-1">Order Quantity (Shares)</label>
+                <label className="block text-[10px] font-mono text-purple-600 dark:text-purple-300 uppercase mb-1">Order Quantity (Shares)</label>
                 <input
                   type="number"
                   min="1"
                   step="1"
                   value={tradeQty}
                   onChange={(e) => setTradeQty(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-full px-4 py-2 bg-black/40 border border-white/10 rounded-xl text-white text-sm outline-none"
+                  className="w-full px-4 py-2 bg-slate-100/50 dark:bg-black/40 border border-slate-200/50 dark:border-white/10 rounded-xl text-slate-800 dark:text-white text-sm outline-none focus:border-purple-500"
                 />
               </div>
             </form>
           </div>
 
-          <div className="pt-4 border-t border-white/5 mt-4 space-y-3">
+          <div className="pt-4 border-t border-slate-200/50 dark:border-white/5 mt-4 space-y-3">
             <div className="flex justify-between text-xs font-mono">
-              <span className="text-gray-400">Total order cost:</span>
-              <span className="text-white font-bold">${(selectedStock.price * tradeQty).toFixed(2)}</span>
+              <span className="text-slate-500 dark:text-gray-400">Total order cost:</span>
+              <span className="text-slate-900 dark:text-white font-bold">${(selectedStock.price * tradeQty).toFixed(2)}</span>
             </div>
             <button
               onClick={handleExecuteTrade}
-              className={`w-full py-3 rounded-xl text-xs font-bold text-white transition-all shadow-[0_4px_15px_rgba(0,0,0,0.3)] active:scale-95 ${
+              className={`w-full py-3 rounded-xl text-xs font-bold text-white transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] active:scale-95 ${
                 tradeType === "buy" 
                   ? "bg-purple-600 hover:bg-purple-500 shadow-purple-500/20" 
                   : "bg-pink-600 hover:bg-pink-500 shadow-pink-500/20"

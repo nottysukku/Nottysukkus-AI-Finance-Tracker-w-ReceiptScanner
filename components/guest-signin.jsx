@@ -14,8 +14,7 @@ export default function GuestSignIn() {
     try {
       setIsLoading(true);
       await createGuestSession();
-      router.push("/dashboard");
-      router.refresh();
+      window.location.href = "/dashboard";
     } catch (error) {
       console.error("Failed to create guest session:", error);
     } finally {
