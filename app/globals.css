@@ -13,6 +13,34 @@ html {
 
 @layer base {
   :root {
+    --background: 210 20% 98%;
+    --foreground: 224 71% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 263.4 70% 50.4%;
+    --radius: 0.75rem;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  .dark {
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
     --card: 224 71% 4%;
@@ -32,34 +60,6 @@ html {
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
-    --radius: 0.75rem;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-
-  .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 263.4 70% 50.4%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 263.4 70% 50.4%;
   }
 }
 
@@ -68,7 +68,13 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground relative min-h-screen;
+    @apply bg-background text-foreground relative min-h-screen transition-colors duration-300;
+    background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05) 0%, rgba(255, 255, 255, 0) 50%),
+                radial-gradient(circle at 0% 100%, rgba(236, 72, 153, 0.05) 0%, rgba(255, 255, 255, 0) 40%),
+                #f8fafc;
+  }
+
+  .dark body {
     background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 50%),
                 radial-gradient(circle at 0% 100%, rgba(236, 72, 153, 0.12) 0%, rgba(15, 23, 42, 0) 40%),
                 #030712;
@@ -77,35 +83,59 @@ html {
 
 /* Glassmorphism Styles */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.55);
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.dark .glass-panel {
+  background: rgba(17, 24, 39, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
 .glass-panel-hover:hover {
-  background: rgba(17, 24, 39, 0.65);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.08);
   transform: translateY(-2px);
 }
 
+.dark .glass-panel-hover:hover {
+  background: rgba(17, 24, 39, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
+}
+
 .glass-panel-glow {
-  background: rgba(17, 24, 39, 0.6);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(236, 72, 153, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.05), inset 0 0 12px rgba(236, 72, 153, 0.02);
+}
+
+.dark .glass-panel-glow {
+  background: rgba(17, 24, 39, 0.6);
   border: 1px solid rgba(236, 72, 153, 0.2);
   box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.1), inset 0 0 12px rgba(236, 72, 153, 0.05);
 }
 
 .glass-input {
-  background: rgba(17, 24, 39, 0.4) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
   backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #0f172a !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.dark .glass-input {
+  background: rgba(17, 24, 39, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
-  transition: all 0.2s ease-in-out;
 }
 
 .glass-input:focus {
