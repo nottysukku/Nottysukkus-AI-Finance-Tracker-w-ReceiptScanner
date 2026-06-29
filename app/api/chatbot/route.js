@@ -1,3 +1,4 @@
+import { checkUser } from "@/lib/checkUser";
 import { NextResponse } from "next/server";
 
 const SITE_CONTEXT = `You are "Money AI", the built-in intelligent assistant for the Money finance tracking platform.
@@ -22,6 +23,16 @@ Be friendly, concise, and helpful. Keep responses under 120 words.`;
 export async function POST(request) {
   try {
     const { message, history } = await request.json();
+    const user = await checkUser();
+
+    const personalizedContext = `${SITE_CONTEXT}
+
+USER PROFILE CONTEXT:
+- Name: ${user?.name || "Guest User"}
+- Annual Salary: $${user?.salary || 60000}
+- Professional Bio/Background: ${user?.bio || "Not specified"}
+
+Please greet the user by their name when appropriate. Use their salary or career background context to tailor your responses if they ask for recommendations.`;
 
     const apiKey = process.env.GEMINI_API_KEY || "AIzaSyDR_NdlD_W1WLAmitqtBxXbIHCn8aHtjQs";
     
@@ -43,7 +54,7 @@ export async function POST(request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           systemInstruction: {
-            parts: [{ text: SITE_CONTEXT }],
+            parts: [{ text: personalizedContext }],
           },
           contents: [
             ...conversationHistory,

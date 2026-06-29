@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { PenBox, LayoutDashboard } from "lucide-react";
+import { PenBox, LayoutDashboard, User } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { checkUser } from "@/lib/checkUser";
@@ -64,7 +64,13 @@ const Header = async () => {
                         avatarBox: "w-9 h-9 border-2 border-purple-500/50 rounded-full hover:border-purple-400 transition-all",
                       },
                     }}
-                  />
+                  >
+                    <UserButton.Link
+                      label="Profile Settings"
+                      labelIcon={<User size={16} />}
+                      href="/profile"
+                    />
+                  </UserButton>
                 </SignedIn>
               )}
             </>

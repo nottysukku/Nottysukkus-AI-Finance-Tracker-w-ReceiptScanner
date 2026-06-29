@@ -13,6 +13,8 @@ model User {
   email         String    @unique
   name          String?
   imageUrl      String?
+  salary        Float?    @default(60000)
+  bio           String?
   transactions  Transaction[]
   accounts      Account[]
   budgets       Budget[]
