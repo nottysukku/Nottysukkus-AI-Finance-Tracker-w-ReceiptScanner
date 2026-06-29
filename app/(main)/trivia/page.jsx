@@ -44,7 +44,7 @@ const QUESTIONS = [
     options: [
       { text: "A period where stock prices drop by 20% or more from recent highs.", isCorrect: true },
       { text: "A period where stock prices surge by 20% or more.", isCorrect: false },
-      { text: "A market where only raw commodities (like grains or metals) are traded.", 'isCorrect': false },
+      { text: "A market where only raw commodities (like grains or metals) are traded.", isCorrect: false },
       { text: "A trading suspension due to system instability or audits.", isCorrect: false },
     ],
     explanation: "A Bear Market describes prolonged price declines, typically defined as when stock market indices drop by 20% or more from recent peaks amid widespread pessimism.",
@@ -107,39 +107,39 @@ export default function TriviaPage() {
   // Grade readouts
   const gradeDetails = () => {
     const rate = (score / QUESTIONS.length) * 100;
-    if (rate === 100) return { badge: "Nexus Grandmaster", color: "text-emerald-400" };
-    if (rate >= 80) return { badge: "Budget Optimizer", color: "text-purple-400" };
-    if (rate >= 60) return { badge: "Financial Apprentice", color: "text-yellow-400" };
-    return { badge: "Insolvent Wanderer", color: "text-red-400" };
+    if (rate === 100) return { badge: "Nexus Grandmaster", color: "text-emerald-500 dark:text-emerald-400" };
+    if (rate >= 80) return { badge: "Budget Optimizer", color: "text-purple-650 dark:text-purple-400" };
+    if (rate >= 60) return { badge: "Financial Apprentice", color: "text-yellow-650 dark:text-yellow-400" };
+    return { badge: "Insolvent Wanderer", color: "text-red-650 dark:text-red-400" };
   };
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 space-y-8 relative z-10">
       {/* HUD Header */}
       <div>
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-2 flex items-center gap-3">
-          <Brain className="h-8 w-8 text-purple-400 animate-pulse-glow" />
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2 flex items-center gap-3">
+          <Brain className="h-8 w-8 text-purple-500 dark:text-purple-400 animate-pulse-glow" />
           Financial Trivia Challenge
         </h1>
-        <p className="text-gray-400 text-sm md:text-base font-light">
+        <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base font-light">
           Test your financial literacy vectors. Clear the security parameters by choosing the correct variables.
         </p>
       </div>
 
       {isFinished ? (
         /* Finished Card */
-        <div className="glass-panel p-8 rounded-3xl border border-white/10 text-center space-y-6 shadow-2xl max-w-md mx-auto">
-          <Award className="h-16 w-16 text-purple-400 mx-auto animate-bounce" />
+        <div className="glass-panel p-8 rounded-3xl border border-slate-200/50 dark:border-white/10 text-center space-y-6 shadow-2xl max-w-md mx-auto">
+          <Award className="h-16 w-16 text-purple-500 dark:text-purple-400 mx-auto animate-bounce" />
           
           <div className="space-y-1">
-            <h2 className="text-2xl font-black text-white">Quiz Terminated</h2>
-            <p className="text-xs text-gray-500 font-mono uppercase tracking-widest">
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white">Quiz Terminated</h2>
+            <p className="text-xs text-slate-500 dark:text-gray-500 font-mono uppercase tracking-widest">
               SCORE: {score} / {QUESTIONS.length} ({Math.round((score/QUESTIONS.length)*100)}%)
             </p>
           </div>
 
-          <div className="p-4 bg-purple-950/20 border border-purple-900/30 rounded-2xl">
-            <span className="text-[10px] font-mono text-purple-300 block uppercase mb-1">Nexus Rank Grade</span>
+          <div className="p-4 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/30 rounded-2xl">
+            <span className="text-[10px] font-mono text-purple-600 dark:text-purple-300 block uppercase mb-1">Nexus Rank Grade</span>
             <div className={`text-xl font-black font-mono ${gradeDetails().color}`}>
               {gradeDetails().badge}
             </div>
@@ -154,14 +154,14 @@ export default function TriviaPage() {
         </div>
       ) : (
         /* Active Question Card */
-        <div className="glass-panel p-6 rounded-3xl border border-white/10 space-y-6 shadow-2xl relative overflow-hidden">
+        <div className="glass-panel p-6 rounded-3xl border border-slate-200/50 dark:border-white/10 space-y-6 shadow-2xl relative overflow-hidden">
           {/* Question HUD counter */}
-          <div className="flex justify-between items-center text-xs font-mono text-purple-300 border-b border-white/5 pb-2">
+          <div className="flex justify-between items-center text-xs font-mono text-purple-600 dark:text-purple-300 border-b border-slate-200/50 dark:border-white/5 pb-2">
             <span>QUESTION {currentIdx + 1} OF {QUESTIONS.length}</span>
             <span>ACCURACY: {score}/{QUESTIONS.length}</span>
           </div>
 
-          <h3 className="text-base sm:text-lg font-black text-white leading-snug">
+          <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug">
             {activeQuestion.question}
           </h3>
 
@@ -171,15 +171,15 @@ export default function TriviaPage() {
               const isSelected = selectedOptIdx === oIdx;
               const hasSelectedAny = selectedOptIdx !== null;
               
-              let styleClass = "border-white/5 hover:border-purple-500/20 bg-black/20 text-gray-300 hover:text-white";
+              let styleClass = "border-slate-200/50 dark:border-white/5 hover:border-purple-500/20 bg-slate-100/50 dark:bg-black/20 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white";
               
               if (hasSelectedAny) {
                 if (opt.isCorrect) {
-                  styleClass = "border-emerald-500/40 bg-emerald-950/20 text-emerald-400 font-semibold";
+                  styleClass = "border-emerald-500/40 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 font-semibold";
                 } else if (isSelected) {
-                  styleClass = "border-pink-500/40 bg-pink-950/20 text-pink-400 font-semibold";
+                  styleClass = "border-pink-500/40 bg-pink-50 dark:bg-pink-950/20 text-pink-600 dark:text-pink-400 font-semibold";
                 } else {
-                  styleClass = "border-white/5 bg-black/40 text-gray-500 opacity-60";
+                  styleClass = "border-slate-200/50 dark:border-white/5 bg-slate-100/30 dark:bg-black/40 text-slate-400 dark:text-gray-500 opacity-60";
                 }
               }
 
@@ -191,8 +191,8 @@ export default function TriviaPage() {
                   className={`w-full text-left p-4 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between ${styleClass}`}
                 >
                   <span>{opt.text}</span>
-                  {hasSelectedAny && opt.isCorrect && <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 ml-2" />}
-                  {hasSelectedAny && isSelected && !opt.isCorrect && <XCircle className="h-4 w-4 text-pink-400 shrink-0 ml-2" />}
+                  {hasSelectedAny && opt.isCorrect && <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0 ml-2" />}
+                  {hasSelectedAny && isSelected && !opt.isCorrect && <XCircle className="h-4 w-4 text-pink-600 dark:text-pink-400 shrink-0 ml-2" />}
                 </button>
               );
             })}
@@ -200,9 +200,9 @@ export default function TriviaPage() {
 
           {/* Explanation HUD */}
           {showExplanation && (
-            <div className="p-4 bg-purple-950/20 border border-purple-900/30 rounded-2xl animate-fadeIn space-y-2 text-xs">
-              <span className="font-mono text-purple-300 uppercase font-black block">System Audit Log:</span>
-              <p className="text-gray-300 leading-relaxed">{activeQuestion.explanation}</p>
+            <div className="p-4 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/30 rounded-2xl animate-fadeIn space-y-2 text-xs">
+              <span className="font-mono text-purple-600 dark:text-purple-300 uppercase font-black block">System Audit Log:</span>
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed">{activeQuestion.explanation}</p>
             </div>
           )}
 
