@@ -209,20 +209,19 @@ export default function GeminiChatbot() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Quick suggestions (only show at start) */}
-                {messages.length <= 1 && (
-                  <div className="px-4 py-2 flex flex-wrap gap-1.5 border-t border-slate-200/50 dark:border-white/5 bg-white/50 dark:bg-slate-900/50">
-                    {QUICK_SUGGESTIONS.map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => handleSend(s)}
-                        className="px-2.5 py-1 rounded-full text-[11px] bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-300 border border-purple-200/50 dark:border-purple-500/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors"
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {/* Quick suggestions (persisting) */}
+                <div className="px-4 py-2 flex flex-wrap gap-1.5 border-t border-slate-200/50 dark:border-white/5 bg-white/50 dark:bg-slate-900/50">
+                  {QUICK_SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => handleSend(s)}
+                      className="px-2.5 py-1 rounded-full text-[11px] bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-300 border border-purple-200/50 dark:border-purple-500/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors cursor-pointer"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
 
                 {/* Input */}
                 <form

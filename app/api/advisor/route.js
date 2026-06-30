@@ -45,7 +45,9 @@ Keep responses under 150 words.`;
     );
 
     if (!response.ok) {
-      throw new Error("Failed to reach Gemini API");
+      const errText = await response.text();
+      console.error("Gemini Advisor API error response:", errText);
+      throw new Error(`Failed to reach Gemini API: ${response.statusText}`);
     }
 
     const data = await response.json();
